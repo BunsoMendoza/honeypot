@@ -5,7 +5,7 @@ case "$1" in
 
         case "$OSTYPE" in
             linux*)
-                tail -n 60 -F /var/log/tomcat*/catalina.out ;;
+                tail -n 60 -F /etc/tomcat/apache-tomcat-9.0.41/logs/catalina.out ;;
             darwin*)
                 tail -n 60 -F /usr/local/Cellar/tomcat/*/libexec/logs/catalina.*.log ;;
         esac
@@ -14,8 +14,8 @@ case "$1" in
     start)
         case "$OSTYPE" in
             linux*)
-                rm -r /var/log/tomcat*/catalina.*
-                /etc/init.d/tomcat* start 
+                rm -r /etc/tomcat/apache-tomcat-9.0.41/logs/catalina.*
+                sudo /etc/tomcat/apache-tomcat-9.0.41/bin/startup.sh
                 ;;
             darwin*)
                 rm -r /usr/local/Cellar/tomcat/*/libexec/logs/catalina.*
@@ -27,7 +27,7 @@ case "$1" in
     stop)
         case "$OSTYPE" in
             linux*)
-                /etc/init.d/tomcat* stop ;;
+                sudo /etc/tomcat/apache-tomcat-9.0.41/bin/shutdown.sh ;;
             darwin*)
                 brew services stop tomcat ;;
         esac
@@ -36,8 +36,9 @@ case "$1" in
     restart)
         case "$OSTYPE" in
             linux*)
-                rm -r /var/log/tomcat*/catalina.*
-                /etc/init.d/tomcat* restart 
+                rm -r /etc/tomcat/apache-tomcat-9.0.41/logs/catalina.*
+                sudo /etc/tomcat/apache-tomcat-9.0.41/bin/shutdown.sh
+                sudo /etc/tomcat/apache-tomcat-9.0.41/bin/startup.sh
                 ;;
             darwin*)
                 rm -r /usr/local/Cellar/tomcat/*/libexec/logs/catalina.*

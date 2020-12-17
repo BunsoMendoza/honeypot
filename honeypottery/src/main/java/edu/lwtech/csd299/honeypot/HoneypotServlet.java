@@ -22,7 +22,7 @@ public class HoneypotServlet extends HttpServlet {
     private static final String TEMPLATE_DIR = "/WEB-INF/classes/templates";
     private static final Configuration freemarker = new Configuration(Configuration.getVersion());
 
-    private static final boolean USE_SQL_DAO = true;  // Set to false if you want to test with the memory-based DAL
+    private static final boolean USE_SQL_DAO = false;  // Set to false if you want to test with the memory-based DAL
 
     private EventDAO eventDao = null;
 
