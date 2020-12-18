@@ -11,10 +11,10 @@ case "$1" in
 
         case "$OSTYPE" in
             linux*)
-                sudo /etc/tomcat/apache-tomcat-9.0.41/bin/shutdown.sh
-                
-                cp target/*.war /etc/tomcat/apache-tomcat-9.0.41/webapps/
-                sudo /etc/tomcat/apache-tomcat-9.0.41/bin/startup.sh
+                /etc/init.d/tomcat* stop
+                sudo sh -c "echo 'UMASK=\"0022\"' > /usr/share/tomcat8/bin/setenv.sh"
+                cp target/*.war /var/lib/tomcat*/webapps/
+                /etc/init.d/tomcat* start
                 ;;
             darwin*)
                 brew services stop tomcat
@@ -29,7 +29,7 @@ case "$1" in
     uninstall)
         case "$OSTYPE" in
             linux*)
-                rm /etc/tomcat/apache-tomcat-9.0.41/webapps/*.war ;;
+                rm /var/lib/tomcat*/webapps/*.war ;;
             darwin*)
                 rm /usr/local/Cellar/tomcat/*/libexec/webapps/*.war ;;
         esac
