@@ -12,7 +12,6 @@ case "$1" in
         case "$OSTYPE" in
             linux*)
                 sudo systemctl disable tomcat9
-                sudo sh -c "echo 'UMASK=\"0022\"' > /usr/share/tomcat9/bin/setenv.sh"
                 cp target/*.war /var/lib/tomcat*/webapps/
                 sudo systemctl enable tomcat9
                 ;;
